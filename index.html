@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIEEE BABY</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #ffe6e6; /* Soft pink background */
+      overflow: hidden;
+    }
+    h1 {
+      color: #ff4081; /* Lovely pink for text */
+      margin-top: 100px;
+      font-size: 2.5em;
+    }
+    button {
+      padding: 10px 25px;
+      font-size: 20px;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 30px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    #yes {
+      background-color: #ff69b4; /* Hot pink */
+      color: white;
+    }
+    #yes:hover {
+      background-color: #ff4081; /* Slightly darker pink on hover */
+    }
+    #no {
+      background-color: #f44336; /* Lovely red */
+      color: white;
+      position: absolute;
+    }
+    #no:hover {
+      background-color: #d32f2f; /* Darker red on hover */
+    }
+    .hearts {
+      position: absolute;
+      animation: float 4s infinite ease-in-out;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="question">Do you love spending time with me? ❤️</h1>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+
+  <!-- JavaScript for logic -->
+  <script>
+    const yesButton = document.getElementById('yes');
+    const noButton = document.getElementById('no');
+    const questionText = document.getElementById('question');
+
+    const questions = [
+      "Do you love spending time with me? ❤️",
+      "Do I make your days brighter? 🌟",
+      "Am I your favorite person in the world? 🌍",
+      "Would you let me make you smile every day? 😊",
+      "Will you hold my hand forever? 🤝",
+      "Will you be mine forever? 💕"
+    ];
+
+    let currentQuestion = 0;
+
+    // Handle "Yes" button click
+    yesButton.addEventListener('click', () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        questionText.textContent = questions[currentQuestion];
+      } else {
+        alert("Yay! You just made me the happiest person alive! 💖");
+      }
+    });
+
+    // Handle "No" button click
+    noButton.addEventListener('click', () => {
+      // Move the "No" button to a random position
+      moveNoButton();
+
+      // Add floating hearts to distract the user
+      createFloatingHeart();
+    });
+
+    // Function to randomly move the "No" button
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    }
+
+    // Function to create floating hearts
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('hearts');
+      heart.style.left = `${Math.random() * window.innerWidth}px`;
+      heart.style.top = `${window.innerHeight}px`;
+      heart.style.fontSize = `${Math.random() * 50 + 10}px`;
+      heart.textContent = '❤️';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000); // Remove heart after animation
+    }
+  </script>
+</body>
+</html>
